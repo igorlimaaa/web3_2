@@ -11,12 +11,12 @@
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.format_sql">true</property>
  
-        <mapping class="br.com.fuctura.model.Produto"/>
-        <mapping class="br.com.fuctura.model.TipoProduto"/>
-        <mapping class="br.com.fuctura.model.Venda"/>
-        <mapping class="br.com.fuctura.model.ItensVenda"/>
-        <mapping class="br.com.fuctura.model.Usuario"/>
-        <mapping class="br.com.fuctura.auditoria.Revisao"/>
+        <mapping class="br.com.web3.model.Produto"/>
+        <mapping class="br.com.web3.model.TipoProduto"/>
+        <mapping class="br.com.web3.model.Venda"/>
+        <mapping class="br.com.web3.model.ItensVenda"/>
+        <mapping class="br.com.web3.model.Usuario"/>
+        <mapping class="br.com.web3.auditoria.Revisao"/>
  
     </session-factory>
 </hibernate-configuration>
