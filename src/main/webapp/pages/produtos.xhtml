@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <ui:composition 
-    template="/layout.xhtml"
+    template="layout.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
@@ -31,10 +31,16 @@
                     <p:column width="400"> 
                         <f:facet name="header">Descrição</f:facet> 
                         <h:outputText value="#{produto.descricao}" /> 
-                    </p:column> 
+                    </p:column>
+                    <p:column width="400"> 
+                        <f:facet name="header">Categoria</f:facet> 
+                        <h:outputText value="#{produto.tipoProduto.descricao}" /> 
+                    </p:column>
                     <p:column width="180"> 
                         <f:facet name="header">Preço</f:facet> 
-                        <h:outputText value="#{produto.preco}" /> 
+                        <h:outputText value="#{produto.preco}">
+                            <f:convertNumber currencySymbol="R$" type="currency" />
+                        </h:outputText> 
                     </p:column> 
                     <p:column width="180"> 
                         <f:facet name="header">Quantidade</f:facet> 

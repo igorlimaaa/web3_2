@@ -32,7 +32,7 @@ public class UsuarioController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         if (usuarioDAO.fazerLogin(usuario)) {
             usuario.setLogado(true);
-            return "/index?faces-redirect=true";
+            return "/pages/index?faces-redirect=true";
         } else {
             usuario.setLogado(false);
             FacesMessage mensagem = new FacesMessage("Usuário/senha "
@@ -46,7 +46,7 @@ public class UsuarioController implements Serializable {
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext()
                 .invalidateSession();
-        return "/login?faces-redirect=true";
+        return "/pages/login?faces-redirect=true";
     }
 
     public Usuario getUsuario() {

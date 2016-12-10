@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <ui:composition 
-    template="/layout.xhtml"
+    template="layout.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"      
     xmlns:h="http://java.sun.com/jsf/html"
@@ -37,12 +37,16 @@
 
                     <p:column> 
                         <f:facet name="header">Data</f:facet> 
-                        <h:outputText value="#{venda.dataVenda}" /> 
+                        <h:outputText value="#{venda.dataVenda}">
+                            <f:convertDateTime type="date" />
+                        </h:outputText>
                     </p:column>  
 
                     <p:column> 
                         <f:facet name="header">Total</f:facet> 
-                        <h:outputText value="#{venda.total}" /> 
+                        <h:outputText value="#{venda.total}">
+                            <f:convertNumber type="currency" currencySymbol="R$" />
+                        </h:outputText>
                     </p:column> 
 
                 </p:dataTable> 
@@ -57,14 +61,12 @@
 
 
                         Cliente
-                        <p:inputText id="cliente"
+                        <p:inputText id="cliente" disabled="#{vendaController.carrinho.size() != 0}"
                                      value="#{vendaController.venda.cliente}"
                                      size="40"/>
 
                         <p:outputLabel value="Produto" for="produto" />
                         <p:selectOneMenu id="produto" value="#{vendaController.produto}" 
-                                         required="true"
-                                         requiredMessage="Selecione um produto"
                                          converter="produto" var="i" filter="true" 
                                          filterMatchMode="startsWith" >
 
@@ -97,20 +99,40 @@
                         <p:column> 
                             <f:facet name="header">Quantidade</f:facet> 
                             <h:outputText value="#{iv.quantidade}" /> 
-                        </p:column> 
+                        </p:column>
+                        <p:column> 
+                            <f:facet name="header">Sub-Total</f:facet> 
+                            <h:outputText value="#{iv.quantidade * iv.produto.preco}">
+                                <f:convertNumber currencySymbol="R$" type="currency" />
+                            </h:outputText> 
+                        </p:column>
+                        <p:column> 
+                            <f:facet name="header">Ações</f:facet>
+                            <p:commandButton actionListener="#{vendaController.excluirProduto(iv)}" immediate="true"
+                                             update="tabProduto" icon="ui-icon-trash">  
+                                <p:confirm header="Confirmation" message="Deseja excluir o registro?" 
+                                           icon="ui-icon-alert" />
+                            </p:commandButton> 
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" 
+                                                 icon="ui-icon-check" />
+                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" 
+                                                 icon="ui-icon-close" />
+                            </p:confirmDialog>
 
+                        </p:column>
 
                     </p:dataTable> 
                     <br/>
-                    <p:commandButton update="tabProduto, gravar" 
+                    <p:commandButton update="tabProduto, gravar, painel" 
                                      actionListener="#{vendaController.adicionarProdutos()}" 
                                      value="Adicionar produto" />
 
                     <hr/>
                     <br/>
                     <p:commandButton id="gravar" update=":formTabela:tabela" 
-                                     actionListener="#{vendaController.gravar}" 
-                                     value="Gravar" 
+                                     action="#{vendaController.gravar}" 
+                                     value="Gravar"
                                      disabled="#{vendaController.desabilitar}" />
 
                 </h:form>

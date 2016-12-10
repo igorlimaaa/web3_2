@@ -35,9 +35,9 @@ public class AutorizacaoFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
         
-        if (!usuario.isLogado() && !request.getRequestURI().endsWith("/login.xhtml")
+        if (!usuario.isLogado() && !request.getRequestURI().endsWith("/pages/login.xhtml")
                 && !request.getRequestURI().contains("/javax.faces.resource/")) {
-            response.sendRedirect(request.getContextPath() + "/login.xhtml");
+            response.sendRedirect(request.getContextPath() + "/pages/login.xhtml");
         } else {
             chain.doFilter(req, res);
 

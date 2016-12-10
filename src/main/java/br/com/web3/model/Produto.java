@@ -42,7 +42,7 @@ public class Produto implements Serializable {
     private double preco;
 
     @Column
-    @Min(value = 1, message = "Quantidade não informada")
+    @Min(value = 0, message = "Quantidade não informada")
     private int quantidade;
 
     @Column(name = "data_cadastro")

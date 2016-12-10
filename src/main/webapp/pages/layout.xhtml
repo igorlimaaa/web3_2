@@ -12,14 +12,14 @@
     <h:body>
         <h:form>
             <p:menubar style="width: 90%; margin-left: 5%">
-                <p:submenu label="Cadastro" icon="ui-icon-document">
-                    <p:menuitem value="Produto" url="produtos.xhtml"/>
+                <p:submenu label="#{msg['menu.cadastro']}" icon="ui-icon-document">
+                    <p:menuitem value="#{msg['menu.produto']}" url="produtos.xhtml"/>
                 </p:submenu>
-                <p:submenu icon="ui-icon-document" label="Movimento">
-                    <p:menuitem value="Vendas" url="vendas.xhtml"/>
+                <p:submenu icon="ui-icon-document" label="#{msg['menu.movimento']}">
+                    <p:menuitem value="#{msg['menu.vendas']}" url="vendas.xhtml"/>
                 </p:submenu>
-                <p:submenu label="Sistema">
-                    <p:menuitem value="Sair" action="#{usuarioController.logout}"/>
+                <p:submenu label="#{msg['menu.sistema']}">
+                    <p:menuitem value="#{msg['menu.sair']}" action="#{usuarioController.logout}"/>
                 </p:submenu>
             </p:menubar>
         </h:form>
@@ -28,7 +28,7 @@
         <div id="conteudo" style="width: 90%">
             <header>
                 <b>
-                    <div style="float: rigth; margin-left: 6%; margin-top: 8px"> Olá #{usuario.login}! </div>
+                    <div style="float: rigth; margin-left: 6%; margin-top: 8px"> #{msg['texto.ola']} #{usuario.login}! </div>
                 </b>
             </header>
             <ui:insert name="corpo" />
@@ -36,6 +36,6 @@
         <br/>
         <br/>
         <br/>
-        <footer style="margin-left: 5%"> <b>Sistema de Vendas - Web3</b></footer>
+        <footer style="margin-left: 5%"> <b>#{msg['rodape.sistema']} - Web3</b></footer>
     </h:body>
 </html>

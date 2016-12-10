@@ -16,7 +16,6 @@
         <mapping class="br.com.web3.model.Venda"/>
         <mapping class="br.com.web3.model.ItensVenda"/>
         <mapping class="br.com.web3.model.Usuario"/>
-        <mapping class="br.com.web3.auditoria.Revisao"/>
  
     </session-factory>
 </hibernate-configuration>

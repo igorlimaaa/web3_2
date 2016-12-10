@@ -73,6 +73,9 @@ public class VendaDAO {
                 total += (itensVenda.getQuantidade() * 
                         itensVenda.getProduto().getPreco());
                 itensVenda.setVenda(venda);
+                Integer novaQuantidade = itensVenda.getProduto().getQuantidade() - itensVenda.getQuantidade();
+                itensVenda.getProduto().setQuantidade(novaQuantidade);
+                session.update(itensVenda.getProduto());
                 session.save(itensVenda);
             }
             venda.setTotal(total);

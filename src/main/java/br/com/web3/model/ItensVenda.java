@@ -37,7 +37,6 @@ public class ItensVenda implements Serializable {
     private Produto produto;
 
     @Column
-    @Min(value = 1, message = "Quantidade não informada")
     private int quantidade;
 
     public ItensVenda() {

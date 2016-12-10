@@ -68,7 +68,7 @@ public class VendaController implements Serializable {
         itensVenda = new ItensVenda();
     }
 
-    public void gravar(ActionEvent actionEvent) {
+    public void gravar() {
         boolean gravar = true;
         String descProduto = "";
         for (ItensVenda iv : carrinho) {
@@ -90,12 +90,39 @@ public class VendaController implements Serializable {
     }
 
     public List<ItensVenda> adicionarProdutos() {
-        ItensVenda iv = new ItensVenda();
-        iv.setProduto(produto);
-        iv.setQuantidade(itensVenda.getQuantidade());
-        carrinho.add(iv);
-        desabilitar = false;
+        boolean valid = true;
+
+        if (produto == null) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Produto não informado", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            valid = false;
+        }
+
+        if (itensVenda.getQuantidade() <= 0) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "A quantidade não pode ser igual ou menor que 0", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            valid = false;
+        }
+
+        if (valid) {
+
+            ItensVenda iv = new ItensVenda();
+            iv.setProduto(produto);
+            iv.setQuantidade(itensVenda.getQuantidade());
+            carrinho.add(iv);
+            itensVenda = new ItensVenda();
+            produto = new Produto();
+            desabilitar = false;
+
+        }
+
         return carrinho;
+    }
+
+    public void excluirProduto(ItensVenda iv) {
+        carrinho.remove(iv);
     }
 
     public List<Produto> getProdutos() {
@@ -154,7 +181,5 @@ public class VendaController implements Serializable {
     public void setTipoRel(String tipoRel) {
         this.tipoRel = tipoRel;
     }
-    
-    
 
 }
