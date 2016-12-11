@@ -16,6 +16,14 @@
                                  oncomplete="dialogCadastrarProduto.show()"
                                  style="margin-left: 5%"/>
 
+                <p:commandButton rendered="true" id="exportar1" value="Relatório de Tipo de Produto" ajax="false">
+                    <p:fileDownload value="#{produtoController.gerarRelatorio()}" />
+                </p:commandButton>
+
+                <p:commandButton rendered="true" id="exportar2" value="Relatório de Produto" ajax="false">	
+                    <p:fileDownload value="#{produtoController.gerarRelatorioProduto()}"/> 
+                </p:commandButton>
+
             </h:form>
             <br/>
             <h:form id="formTabela">

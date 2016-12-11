@@ -11,8 +11,10 @@ import br.com.web3.dao.VendaDAO;
 import br.com.web3.model.ItensVenda;
 import br.com.web3.model.Produto;
 import br.com.web3.model.Venda;
+import br.com.web3.relatorio.Relatorio;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -32,6 +34,7 @@ public class VendaController implements Serializable {
     private Venda venda;
     private ItensVenda itensVenda;
     private Produto produto;
+    private Relatorio relatorio;
 
     private VendaDAO vendaDAO;
     private ProdutoDAO produtoDAO;
@@ -119,6 +122,19 @@ public class VendaController implements Serializable {
         }
 
         return carrinho;
+    }
+    
+    public void gerarRelatorio() {
+        List<Venda> listaVenda = null;
+        listaVenda = vendaDAO.getList(venda.getCodigo());
+
+        List<ItensVenda> listagemSubRel = itensVendaDAO.getListByVenda(venda);
+        HashMap paramRel = new HashMap();
+        paramRel.put("titulo", "Venda: " + venda.getCodigo());
+        String nomeRelatorio = "relVendas";
+        String subNomeRelatorio = "relItensVenda";
+        relatorio.gerarRelatorioSub(nomeRelatorio, paramRel, listaVenda, 
+                listagemSubRel, subNomeRelatorio, tipoRel);
     }
 
     public void excluirProduto(ItensVenda iv) {

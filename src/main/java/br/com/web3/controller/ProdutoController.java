@@ -9,11 +9,13 @@ import br.com.web3.dao.ProdutoDAO;
 import br.com.web3.dao.TipoProdutoDAO;
 import br.com.web3.model.Produto;
 import br.com.web3.model.TipoProduto;
+import br.com.web3.relatorio.Relatorio;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -23,10 +25,6 @@ import javax.servlet.ServletContext;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 
-/**
- *
- * @author aula
- */
 @ManagedBean
 @SessionScoped
 public class ProdutoController {
@@ -36,6 +34,7 @@ public class ProdutoController {
     private List<Produto> produtoList;
     private List<String> images;
     private TipoProdutoDAO tipoProdutoDAO;
+    private Relatorio relatorio;
     public static List<TipoProduto> tipos;
     private TipoProduto tipoProduto;
 
@@ -159,6 +158,38 @@ public class ProdutoController {
 
         }
         return images;
+    }
+    
+        public void gerarRelatorio() {
+        try {
+            List<TipoProduto> listagemResultado = tipoProdutoDAO.pesquisarTodos();
+            HashMap paramRel = new HashMap();
+            String nomeRelatorio = "relTipoProduto";
+            relatorio.gerarRelatorio(nomeRelatorio, paramRel, listagemResultado);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+  
+    public void gerarRelatorioProduto() {
+        try {
+            List<Produto> listagemResultado = produtoDAO.pesquisarTodos();
+            HashMap paramRel = new HashMap();
+            String nomeRelatorio = "relProduto";
+            relatorio.gerarRelatorio(nomeRelatorio, paramRel, listagemResultado);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+   public void gerarGraficoProduto() {
+        try {
+            List<Produto> listagemResultado = produtoDAO.pesquisarTodos();
+            HashMap paramRel = new HashMap();
+            String nomeRelatorio = "relGrafico";
+            relatorio.gerarRelatorio(nomeRelatorio, paramRel, listagemResultado);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public TipoProduto getTipoProduto() {
