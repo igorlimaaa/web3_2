@@ -42,6 +42,7 @@ public class ProdutoController {
         produtoDAO = new ProdutoDAO();
         tipoProdutoDAO = new TipoProdutoDAO();
         tipos = new ArrayList<TipoProduto>();
+        relatorio = new Relatorio();
     }
 
     private void lista() {

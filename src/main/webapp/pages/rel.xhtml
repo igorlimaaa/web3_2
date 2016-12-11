@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<ui:composition 
+    template="layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="titulo">Menu Principal</ui:define>
+    <ui:define name="corpo">
+        <h:body>
+            <br/>
+            <h:form id="formTabela">
+                <p:dataTable id="tabela" value="#{vendaController.vendaList}" 
+                             var="venda"   emptyMessage="Nenhum registro" 
+                             paginator="true" rows="5" paginatorPosition="bottom" 
+                             style="width: 100%; margin-left: 5%"> 
+                    <f:facet name="header">Relatório de Vendas</f:facet> 
+                    <p:column width="100"> 
+                        <f:facet name="header">Código</f:facet> 
+                        <h:outputText value="#{venda.codigo}" /> 
+                    </p:column> 
+                    <p:column width="400"> 
+                        <f:facet name="header">Cliente</f:facet> 
+                        <h:outputText value="#{venda.cliente}" /> 
+                    </p:column>
+                    <p:column width="400"> 
+                        <f:facet name="header">Data de Venda</f:facet> 
+                        <h:outputText value="#{venda.dataVenda}" /> 
+                    </p:column>
+                    <p:column width="180"> 
+                        <f:facet name="header">Total</f:facet> 
+                        <h:outputText value="#{venda.total}">
+                            <f:convertNumber currencySymbol="R$" type="currency" />
+                        </h:outputText> 
+                    </p:column>
+                </p:dataTable> 
+            </h:form>
+
+            
+        </h:body>
+    </ui:define>
+</ui:composition>

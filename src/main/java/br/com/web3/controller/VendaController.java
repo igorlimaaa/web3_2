@@ -52,6 +52,7 @@ public class VendaController implements Serializable {
         produtoDAO = new ProdutoDAO();
         itensVendaDAO = new ItensVendaDAO();
         PRODUTOS = new ArrayList<Produto>();
+        relatorio = new Relatorio();
     }
 
     private void lista() {
