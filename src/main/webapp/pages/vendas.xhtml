@@ -52,7 +52,7 @@
                     <p:column> 
                         <f:facet name="header">Total</f:facet> 
                         <h:outputText value="#{venda.total}">
-                            <f:convertNumber type="currency" currencySymbol="R$" />
+                            <f:convertNumber type="currency" />
                         </h:outputText>
                     </p:column> 
                      <p:column width="200"> 
@@ -119,7 +119,7 @@
                         <p:column> 
                             <f:facet name="header">Sub-Total</f:facet> 
                             <h:outputText value="#{iv.quantidade * iv.produto.preco}">
-                                <f:convertNumber currencySymbol="R$" type="currency" />
+                                <f:convertNumber type="currency" />
                             </h:outputText> 
                         </p:column>
                         <p:column> 

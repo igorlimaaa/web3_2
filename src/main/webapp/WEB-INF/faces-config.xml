@@ -5,8 +5,9 @@
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
     <application>
         <locale-config>
-            <default-locale>en</default-locale>
+            <default-locale>en_US</default-locale>
             <supported-locale>pt_BR</supported-locale>
+            <supported-locale>en_US</supported-locale>
         </locale-config> 
         <resource-bundle>
             <base-name>br.com.web3.messages.messages</base-name>
@@ -14,5 +15,4 @@
         </resource-bundle>
         <message-bundle>br.com.web3.messages.messages</message-bundle> 	
     </application>
-    
 </faces-config>

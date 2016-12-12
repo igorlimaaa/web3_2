@@ -3,40 +3,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>
-            <ui:insert name="Título"/>
-        </title>
-    </h:head>
-    <h:body>
-        <h:form>
-            <p:menubar style="width: 90%; margin-left: 5%">
-                <p:submenu label="#{msg['menu.cadastro']}" icon="ui-icon-document">
-                    <p:menuitem value="#{msg['menu.produto']}" url="produtos.xhtml"/>
-                </p:submenu>
-                <p:submenu icon="ui-icon-document" label="#{msg['menu.movimento']}">
-                    <p:menuitem value="#{msg['menu.vendas']}" url="vendas.xhtml"/>
-                    <p:menuitem value="#{msg['menu.rel']}" url="rel.xhtml"/>
-                </p:submenu>
-                <p:submenu label="#{msg['menu.sistema']}">
-                    <p:menuitem value="#{msg['menu.sair']}" action="#{usuarioController.logout}"/>
-                </p:submenu>
-            </p:menubar>
-        </h:form>
-        <br/>
-        <br/>
-        <div id="conteudo" style="width: 90%">
-            <header>
-                <b>
-                    <div style="float: rigth; margin-left: 6%; margin-top: 8px"> #{msg['texto.ola']} #{usuario.login}! </div>
-                </b>
-            </header>
-            <ui:insert name="corpo" />
-        </div>
-        <br/>
-        <br/>
-        <br/>
-        <footer style="margin-left: 5%"> <b>#{msg['rodape.sistema']} - Web3</b></footer>
-    </h:body>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:view locale="#{languageController.currentLocale}">
+        <h:head>
+            <title>
+                <ui:insert name="Título"/>
+            </title>
+        </h:head>
+        <h:body>
+            <h:form>
+                <p:menubar style="width: 90%; margin-left: 5%">
+                    <p:submenu label="#{msg['menu.cadastro']}" icon="ui-icon-document">
+                        <p:menuitem value="#{msg['menu.produto']}" url="produtos.xhtml"/>
+                    </p:submenu>
+                    <p:submenu icon="ui-icon-document" label="#{msg['menu.movimento']}">
+                        <p:menuitem value="#{msg['menu.vendas']}" url="vendas.xhtml"/>
+                        <p:menuitem value="#{msg['menu.rel']}" url="rel.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="#{msg['menu.sistema']}">
+                        <p:menuitem action="#{languageController.portugueseLocale}" value="#{msg['idioma.portugues']}" update="@all" />
+                        <p:menuitem action="#{languageController.englishLocale}" value="#{msg['idioma.ingles']}" update="@all"/>
+                        <p:menuitem value="#{msg['menu.sair']}" action="#{usuarioController.logout}"/>
+                    </p:submenu>
+                </p:menubar>
+            </h:form>
+            <br/>
+            <br/>
+            <div id="conteudo" style="width: 90%">
+                <header>
+                    <b>
+                        <div style="margin-left: 6%; margin-top: 8px"> #{msg['texto.ola']} #{usuario.login}! </div>
+                    </b>
+                </header>
+                <ui:insert name="corpo" />
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <footer style="margin-left: 5%"> <b>#{msg['rodape.sistema']} - Web3</b></footer>
+        </h:body>
+    </f:view>
 </html>

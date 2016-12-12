@@ -26,12 +26,14 @@
                     </p:column>
                     <p:column width="400"> 
                         <f:facet name="header">Data de Venda</f:facet> 
-                        <h:outputText value="#{venda.dataVenda}" /> 
+                        <h:outputText value="#{venda.dataVenda}">
+                            <f:convertDateTime />
+                        </h:outputText>
                     </p:column>
                     <p:column width="180"> 
                         <f:facet name="header">Total</f:facet> 
                         <h:outputText value="#{venda.total}">
-                            <f:convertNumber currencySymbol="R$" type="currency" />
+                            <f:convertNumber type="currency" />
                         </h:outputText> 
                     </p:column>
                 </p:dataTable> 
