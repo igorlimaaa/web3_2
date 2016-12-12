@@ -9,6 +9,7 @@
     <ui:define name="titulo">Menu Principal</ui:define>
     <ui:define name="corpo">
         <h:body>
+            <br/>
             <h:form id="formNovo">
                 <p:commandButton value="Nova venda" id="novo" 
                                  update=":formCadastro:painel" 
@@ -34,7 +35,7 @@
                              value="#{vendaController.vendaList}" 
                              emptyMessage="Nenhum registro" 
                              paginator="true" rows="10" paginatorPosition="bottom"
-                             style="margin-left: 5%; width: 90%">  
+                             style="margin-left: 5%; width: 100%">  
                     <f:facet name="header"> Vendas</f:facet> 
 
                     <p:column> 
