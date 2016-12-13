@@ -11,6 +11,13 @@
         <h:body>
             <br/>
             <h:form id="formTabela">
+                <h:panelGrid columns="2" style="margin-left: 5.5%" cellpadding="5">
+                 <p:outputLabel for="tipoRel" value="Tipo Relatório" style="margin-left: 5%"/>
+                <p:selectOneRadio id="tipoRel" value="#{vendaController.tipoRel}">
+                    <f:selectItem itemLabel="PDF" itemValue="PDF" />
+                    <f:selectItem itemLabel="XLS" itemValue="XLS" />
+                </p:selectOneRadio>
+            </h:panelGrid>
                 <p:dataTable id="tabela" value="#{vendaController.vendaList}" 
                              var="venda"   emptyMessage="Nenhum registro" 
                              paginator="true" rows="5" paginatorPosition="bottom" 
@@ -21,10 +28,10 @@
                         <h:outputText value="#{venda.codigo}" /> 
                     </p:column> 
                     <p:column width="400"> 
-                        <f:facet name="header">Cliente</f:facet> 
+                        <f:facet  name="header">Cliente</f:facet> 
                         <h:outputText value="#{venda.cliente}" /> 
                     </p:column>
-                    <p:column width="400"> 
+                    <p:column filterMaxLength="" width="400"> 
                         <f:facet name="header">Data de Venda</f:facet> 
                         <h:outputText value="#{venda.dataVenda}">
                             <f:convertDateTime />
@@ -36,6 +43,15 @@
                             <f:convertNumber type="currency" />
                         </h:outputText> 
                     </p:column>
+                    <p:column width="200"> 
+                    <f:facet name="header">Ação</f:facet> 
+                    <h:commandButton					
+                        value="Relatório Vendas"	
+                        action="#{vendaController.gerarRelatorio()}">
+                        <f:setPropertyActionListener 
+                            target="#{vendaController.venda}" value="#{venda}"/>  
+                    </h:commandButton>  
+                </p:column> 
                 </p:dataTable> 
             </h:form>
 

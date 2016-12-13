@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.web3.controller;
 
+import br.com.web3.dao.ItensVendaDAO;
 import br.com.web3.dao.ProdutoDAO;
 import br.com.web3.dao.TipoProdutoDAO;
+import br.com.web3.dao.VendaDAO;
+import br.com.web3.model.ItensVenda;
 import br.com.web3.model.Produto;
 import br.com.web3.model.TipoProduto;
+import br.com.web3.model.Venda;
 import br.com.web3.relatorio.Relatorio;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,6 +16,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -37,6 +37,10 @@ public class ProdutoController {
     private Relatorio relatorio;
     public static List<TipoProduto> tipos;
     private TipoProduto tipoProduto;
+    private ItensVendaDAO itensvendaDAO;
+    private ItensVenda itensvenda;
+    private Venda venda;
+    private VendaDAO vendaDAO;
 
     public ProdutoController() {
         produtoDAO = new ProdutoDAO();
@@ -94,8 +98,13 @@ public class ProdutoController {
     }
 
     // Excluir novo produto
-    public void excluirProduto(ActionEvent actionEvent) {
-        produtoDAO.excluir(produto);
+    public void excluirProduto(Produto produto) {
+        
+        boolean erro = produtoDAO.excluir(produto/*, itensvenda, venda*/);
+        
+        if (erro){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Exclusão não pode ser realizada! Produto associado à venda.", ""));
+        }
     }
 
     public void doUpload(FileUploadEvent fileUploadEvent) {

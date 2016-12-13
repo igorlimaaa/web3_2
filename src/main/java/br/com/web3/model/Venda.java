@@ -8,6 +8,7 @@ package br.com.web3.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,7 +44,7 @@ public class Venda implements Serializable {
     @Column
     private double total;
     
-    @OneToMany(mappedBy="venda", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="venda", fetch=FetchType.LAZY/*, cascade = CascadeType.ALL*/)
     private List<ItensVenda> itensVendas;
 
 

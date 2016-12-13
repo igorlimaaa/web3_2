@@ -24,13 +24,6 @@
 
 
             <h:form id="formTabela" >
-                 <h:panelGrid columns="2" style="margin-left: 5.5%" cellpadding="5">
-                 <p:outputLabel for="tipoRel" value="Tipo Relatório" style="margin-left: 5%"/>
-                <p:selectOneRadio id="tipoRel" value="#{vendaController.tipoRel}">
-                    <f:selectItem itemLabel="PDF" itemValue="PDF" />
-                    <f:selectItem itemLabel="XLS" itemValue="XLS" />
-                </p:selectOneRadio>
-            </h:panelGrid>
                 <p:dataTable id="tabela" var="venda" 
                              value="#{vendaController.vendaList}" 
                              emptyMessage="Nenhum registro" 
@@ -55,17 +48,7 @@
                         <h:outputText value="#{venda.total}">
                             <f:convertNumber type="currency" />
                         </h:outputText>
-                    </p:column> 
-                     <p:column width="200"> 
-                    <f:facet name="header">Ação</f:facet> 
-                    <h:commandButton					
-                        value="Relatório Vendas"	
-                        action="#{vendaController.gerarRelatorio()}">
-                        <f:setPropertyActionListener 
-                            target="#{vendaController.venda}" value="#{venda}"/>  
-                    </h:commandButton>  
-                </p:column> 
-
+                    </p:column>
                 </p:dataTable> 
                 <hr/>      
             </h:form>

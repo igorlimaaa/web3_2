@@ -27,6 +27,9 @@
             </h:form>
             <br/>
             <h:form id="formTabela">
+                <p:outputPanel style="margin-left: 5%;">
+                    <p:messages autoUpdate="true" showDetail="false" />
+                </p:outputPanel>
                 <p:dataTable id="tabela" value="#{produtoController.produtoList}" 
                              var="produto"   emptyMessage="Nenhum registro" 
                              paginator="true" rows="5" paginatorPosition="bottom" 
@@ -81,12 +84,10 @@
                                 target="#{produtoController.produto}" value="#{produto}"/>  
                         </p:commandButton> 
 
-                        <p:commandButton actionListener="#{produtoController.excluirProduto}"
+                        <p:commandButton action="#{produtoController.excluirProduto(produto)}"
                                          update="tabela" icon="ui-icon-trash">  
                             <p:confirm header="Confirmation" message="Deseja excluir o registro?" 
-                                       icon="ui-icon-alert" />
-                            <f:setPropertyActionListener target="#{produtoController.produto}" 
-                                                         value="#{produto}"/>  
+                                       icon="ui-icon-alert" />  
                         </p:commandButton> 
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                             <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" 

@@ -6,16 +6,15 @@
         <link rel="stylesheet" href="resources/css/estilos.css"/>
         <title>Tela de Login</title>
     </h:head>
-    <h:body>
-        <!--<img src="mesa1.jpg" id="gambiarra" alt=""/>-->
-        <!--<h:graphicImage library="imagens" name="mesa1.png" width="80%" height="80%" />-->
+    <h:body style="background-image: url(web.jpg); background-size: 35%">
         <p:commandButton value="Realizar o Login" oncomplete="dlgNovo.show();" image="icon-add" style="margin-left: 43%"/>      
-        <!-- Formulário para inserir Usuário e Senha -->
         <h:form id="formUsuario">
             <p:dialog header="Realizar o Login" widgetVar="dlgNovo" resizable="false" id="dlgNovo"  
                       showEffect="fade" hideEffect="explode" modal="true" style="">  
                 <p:growl id="growl" showDetail="true" sticky="true" />   
-                <h:panelGrid id="pgNovo" columns="2" cellpadding="4" style="margin:0 auto;">  
+                <h:panelGrid id="pgNovo" columns="2" cellpadding="4" style="margin:0 auto;">
+                    <p:messages autoUpdate="true" showDetail="false" />
+                    <br/>
                     <h:outputText value="Usuário:" />  
                     <p:inputText value="#{usuarioController.usuario.login}"/>
                     <h:outputText value="Senha:" />  

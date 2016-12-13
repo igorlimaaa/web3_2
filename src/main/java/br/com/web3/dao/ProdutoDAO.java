@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.web3.dao;
 
+import br.com.web3.model.ItensVenda;
 import br.com.web3.model.Produto;
+import br.com.web3.model.Venda;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -14,13 +11,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 
-/**
- *
- * @author aula
- */
 public class ProdutoDAO implements Serializable {
 
     private SessionFactory factory;
+    //private ItensVenda itensvenda;
 
     public ProdutoDAO() {
         factory = HibernateUtil.getSessionFactory();
@@ -41,18 +35,24 @@ public class ProdutoDAO implements Serializable {
         }
     }
 
-    public void excluir(Produto produto) {
+    public boolean excluir(Produto produto/*, ItensVenda itensvenda, Venda venda*/) {
+        boolean erro = false;
         Session session = factory.openSession();
         try {
             session.beginTransaction();
+            //session.delete(itensvenda.getProduto());
+            //session.delete(venda.getCliente());
             session.delete(produto);
             session.getTransaction().commit();//executa o commit 
         } catch (HibernateException e) {
             session.getTransaction().rollback();
-            e.printStackTrace();
+            erro = true;
         } finally {
             session.close();
         }
+        
+        return erro;
+        
     }
 
     public Produto getProduto(int id) {
