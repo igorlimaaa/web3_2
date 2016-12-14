@@ -30,6 +30,25 @@ public class UsuarioController implements Serializable {
 
     public String fazerLogin() {
         FacesContext context = FacesContext.getCurrentInstance();
+        boolean isValid = true;
+        
+        
+        if(usuario.getLogin() == null){
+            FacesMessage mensagem = new FacesMessage("O campo usuário é obrigatório.");
+            mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(null, mensagem);
+            isValid = false;
+        }
+        
+        if(usuario.getSenha() == null){
+            FacesMessage mensagem = new FacesMessage("O campo senha é obrigatório.");
+            mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(null, mensagem);
+            isValid = false;
+        }
+        
+        if(isValid){
+        
         if (usuarioDAO.fazerLogin(usuario)) {
             usuario.setLogado(true);
             return "/pages/index?faces-redirect=true";
@@ -39,6 +58,7 @@ public class UsuarioController implements Serializable {
                     + "inválidos!");
             mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
             context.addMessage(null, mensagem);
+        }
         }
         return null;
     }

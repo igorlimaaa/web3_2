@@ -5,6 +5,7 @@
  */
 package br.com.web3.model;
 
+import com.sun.istack.internal.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -34,15 +35,15 @@ public class Produto implements Serializable {
     private int codigo;
 
     @Column
-    @NotEmpty(message = "Descrição não informada")
+    @NotEmpty(message = "A descrição deve ser informada.")
     private String descricao;
 
     @Column
-    @Min(value = 1, message = "O valor mínimo do preço deve ser 1")
+    @Min(value = 1, message = "O preço não pode ser inferior a 1")
     private double preco;
 
     @Column
-    @Min(value = 0, message = "Quantidade não informada")
+    @Min(value = 0, message = "A quantidade não pode ser menor que 0.")
     private int quantidade;
 
     @Column(name = "data_cadastro")

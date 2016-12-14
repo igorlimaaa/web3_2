@@ -12,39 +12,39 @@
             <br/>
             <h:form id="formTabela">
                 <h:panelGrid columns="2" style="margin-left: 5.5%" cellpadding="5">
-                 <p:outputLabel for="tipoRel" value="Tipo Relatório" style="margin-left: 5%"/>
+                 <p:outputLabel for="tipoRel" value="#{msg['relatorio']}" style="margin-left: 5%"/>
                 <p:selectOneRadio id="tipoRel" value="#{vendaController.tipoRel}">
                     <f:selectItem itemLabel="PDF" itemValue="PDF" />
                     <f:selectItem itemLabel="XLS" itemValue="XLS" />
                 </p:selectOneRadio>
             </h:panelGrid>
                 <p:dataTable id="tabela" value="#{vendaController.vendaList}" 
-                             var="venda"   emptyMessage="Nenhum registro" 
+                             var="venda"   emptyMessage="#{msg['table.empty']}" 
                              paginator="true" rows="5" paginatorPosition="bottom" 
                              style="width: 100%; margin-left: 5%"> 
-                    <f:facet name="header">Relatório de Vendas</f:facet> 
+                    <f:facet name="header">#{msg['relatorio.vendas']}</f:facet> 
                     <p:column width="100"> 
-                        <f:facet name="header">Código</f:facet> 
+                        <f:facet name="header">#{msg['table.codigo']}</f:facet> 
                         <h:outputText value="#{venda.codigo}" /> 
                     </p:column> 
                     <p:column width="400"> 
-                        <f:facet  name="header">Cliente</f:facet> 
+                        <f:facet  name="header">#{msg['table.cliente']}</f:facet> 
                         <h:outputText value="#{venda.cliente}" /> 
                     </p:column>
                     <p:column filterMaxLength="" width="400"> 
-                        <f:facet name="header">Data de Venda</f:facet> 
+                        <f:facet name="header">#{msg['table.data.venda']}</f:facet> 
                         <h:outputText value="#{venda.dataVenda}">
                             <f:convertDateTime />
                         </h:outputText>
                     </p:column>
                     <p:column width="180"> 
-                        <f:facet name="header">Total</f:facet> 
+                        <f:facet name="header">#{msg['table.total']}</f:facet> 
                         <h:outputText value="#{venda.total}">
                             <f:convertNumber type="currency" />
                         </h:outputText> 
                     </p:column>
                     <p:column width="200"> 
-                    <f:facet name="header">Ação</f:facet> 
+                    <f:facet name="header">#{msg['table.acao']}</f:facet> 
                     <h:commandButton					
                         value="Relatório Vendas"	
                         action="#{vendaController.gerarRelatorio()}">

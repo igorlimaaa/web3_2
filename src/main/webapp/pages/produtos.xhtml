@@ -10,17 +10,13 @@
     <ui:define name="corpo">
         <h:body>
             <h:form id="formNovo">
-                <p:commandButton value="Novo Produto" id="novo" 
+                <p:commandButton value="#{msg['btn.novoProduto']}" id="novo" 
                                  update=":formCadastro:painel" 
                                  actionListener="#{produtoController.novo}"
                                  oncomplete="dialogCadastrarProduto.show()"
                                  style="margin-left: 5%"/>
 
-                <p:commandButton rendered="true" id="exportar1" value="Relatório de Tipo de Produto" ajax="false">
-                    <p:fileDownload value="#{produtoController.gerarRelatorio()}" />
-                </p:commandButton>
-
-                <p:commandButton rendered="true" id="exportar2" value="Relatório de Produto" ajax="false">	
+                <p:commandButton rendered="true" id="exportar2" value="#{msg['btn.relProd']}" ajax="false">	
                     <p:fileDownload value="#{produtoController.gerarRelatorioProduto()}"/> 
                 </p:commandButton>
 
@@ -34,31 +30,31 @@
                              var="produto"   emptyMessage="Nenhum registro" 
                              paginator="true" rows="5" paginatorPosition="bottom" 
                              style="width: 100%; margin-left: 5%"> 
-                    <f:facet name="header"> Produtos cadastrados</f:facet> 
+                    <f:facet name="header">#{msg['table.produtos']}</f:facet> 
                     <p:column width="100"> 
-                        <f:facet name="header">Codigo</f:facet> 
+                        <f:facet name="header">#{msg['table.codigo']}</f:facet> 
                         <h:outputText value="#{produto.codigo}" /> 
                     </p:column> 
                     <p:column width="400"> 
-                        <f:facet name="header">Descrição</f:facet> 
+                        <f:facet name="header">#{msg['table.descricao']}</f:facet> 
                         <h:outputText value="#{produto.descricao}" /> 
                     </p:column>
                     <p:column width="400"> 
-                        <f:facet name="header">Categoria</f:facet> 
+                        <f:facet name="header">#{msg['table.categoria']}</f:facet> 
                         <h:outputText value="#{produto.tipoProduto.descricao}" /> 
                     </p:column>
                     <p:column width="180"> 
-                        <f:facet name="header">Preço</f:facet> 
+                        <f:facet name="header">#{msg['table.preco']}</f:facet> 
                         <h:outputText value="#{produto.preco}">
                             <f:convertNumber type="currency" />
                         </h:outputText> 
                     </p:column> 
                     <p:column width="180"> 
-                        <f:facet name="header">Quantidade</f:facet> 
+                        <f:facet name="header">#{msg['table.qtde']}</f:facet> 
                         <h:outputText value="#{produto.quantidade}" /> 
                     </p:column> 
                     <p:column width="200"> 
-                        <f:facet name="header">Ação</f:facet> 
+                        <f:facet name="header">#{msg['table.acao']}</f:facet> 
 
                         <p:commandButton id="btnUpload" 
                                          oncomplete="dialogUploadImagens.show()" icon="ui-icon-circle-arrow-n">
@@ -87,7 +83,7 @@
                         <p:commandButton action="#{produtoController.excluirProduto(produto)}"
                                          update="tabela" icon="ui-icon-trash">  
                             <p:confirm header="Confirmation" message="Deseja excluir o registro?" 
-                                       icon="ui-icon-alert" />  
+                                       icon="ui-icon-alert" />
                         </p:commandButton> 
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                             <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" 

@@ -12,14 +12,17 @@
             <p:dialog header="Realizar o Login" widgetVar="dlgNovo" resizable="false" id="dlgNovo"  
                       showEffect="fade" hideEffect="explode" modal="true" style="">  
                 <p:growl id="growl" showDetail="true" sticky="true" />   
-                <h:panelGrid id="pgNovo" columns="2" cellpadding="4" style="margin:0 auto;">
+                <div>
                     <p:messages autoUpdate="true" showDetail="false" />
-                    <br/>
+                </div>
+                <div>
                     <h:outputText value="Usuário:" />  
-                    <p:inputText value="#{usuarioController.usuario.login}"/>
+                    <p:inputText value="#{usuarioController.usuario.login}" style="width: 100%" />
+                </div>
+                <div>
                     <h:outputText value="Senha:" />  
-                    <p:password value="#{usuarioController.usuario.senha}"/>
-                </h:panelGrid>
+                    <p:password value="#{usuarioController.usuario.senha}" style="width: 100%" />
+                </div>
                 <p:separator />
                 <p:commandButton value="Logar" action="#{usuarioController.fazerLogin()}"/>
             </p:dialog> 

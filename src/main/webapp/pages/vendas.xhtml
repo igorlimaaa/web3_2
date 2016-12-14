@@ -26,25 +26,25 @@
             <h:form id="formTabela" >
                 <p:dataTable id="tabela" var="venda" 
                              value="#{vendaController.vendaList}" 
-                             emptyMessage="Nenhum registro" 
+                             emptyMessage="#{msg['table.empty']}" 
                              paginator="true" rows="10" paginatorPosition="bottom"
                              style="margin-left: 5%; width: 100%">  
-                    <f:facet name="header"> Vendas</f:facet> 
+                    <f:facet name="header"> #{msg['table.vendas']}</f:facet> 
 
                     <p:column> 
-                        <f:facet name="header">Cliente</f:facet> 
+                        <f:facet name="header">#{msg['table.cliente']}</f:facet> 
                         <h:outputText value="#{venda.cliente}" /> 
                     </p:column> 
 
                     <p:column> 
-                        <f:facet name="header">Data</f:facet> 
+                        <f:facet name="header">#{msg['table.data']}</f:facet> 
                         <h:outputText value="#{venda.dataVenda}">
                             <f:convertDateTime type="date" />
                         </h:outputText>
                     </p:column>  
 
                     <p:column> 
-                        <f:facet name="header">Total</f:facet> 
+                        <f:facet name="header">#{msg['table.total']}</f:facet> 
                         <h:outputText value="#{venda.total}">
                             <f:convertNumber type="currency" />
                         </h:outputText>

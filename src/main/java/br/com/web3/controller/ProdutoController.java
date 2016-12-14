@@ -77,19 +77,26 @@ public class ProdutoController {
 
     // Incluir novo produto
     public void gravar(ActionEvent actionEvent) {
-        produto.setTipoProduto(tipoProduto);
-        produtoDAO.inserir(produto);
-        RequestContext context = RequestContext.getCurrentInstance();
-        context.execute("dialogCadastrarProduto.hide()");
+
+        if (tipoProduto != null) {
+
+            produto.setTipoProduto(tipoProduto);
+            produtoDAO.inserir(produto);
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("dialogCadastrarProduto.hide()");
+
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "A categoria não foi informada.", ""));
+        }
+
     }
 
-  
     // Alterar novo produto
     public void inicioAlterarProduto(ActionEvent actionEvent) {
-       //tipoProduto = produto.getTipoProduto();
-      
+        //tipoProduto = produto.getTipoProduto();
+
     }
-    
+
     // Alterar novo produto
     public void fimAlterarProduto(ActionEvent actionEvent) {
         produtoDAO.atualizar(produto);
@@ -99,10 +106,10 @@ public class ProdutoController {
 
     // Excluir novo produto
     public void excluirProduto(Produto produto) {
-        
+
         boolean erro = produtoDAO.excluir(produto/*, itensvenda, venda*/);
-        
-        if (erro){
+
+        if (erro) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Exclusão não pode ser realizada! Produto associado à venda.", ""));
         }
     }
@@ -169,8 +176,8 @@ public class ProdutoController {
         }
         return images;
     }
-    
-        public void gerarRelatorio() {
+
+    public void gerarRelatorio() {
         try {
             List<TipoProduto> listagemResultado = tipoProdutoDAO.pesquisarTodos();
             HashMap paramRel = new HashMap();
@@ -180,7 +187,7 @@ public class ProdutoController {
             e.printStackTrace();
         }
     }
-  
+
     public void gerarRelatorioProduto() {
         try {
             List<Produto> listagemResultado = produtoDAO.pesquisarTodos();
@@ -191,7 +198,8 @@ public class ProdutoController {
             e.printStackTrace();
         }
     }
-   public void gerarGraficoProduto() {
+
+    public void gerarGraficoProduto() {
         try {
             List<Produto> listagemResultado = produtoDAO.pesquisarTodos();
             HashMap paramRel = new HashMap();
@@ -213,9 +221,5 @@ public class ProdutoController {
     public List<TipoProduto> getTipos() {
         return tipos;
     }
-    
-    
-    
-    
 
 }
