@@ -11,7 +11,7 @@
         <h:body>
             <br/>
             <h:form id="formNovo">
-                <p:commandButton value="Nova venda" id="novo" 
+                <p:commandButton value="#{msg['btn.novaVenda']}" id="novo" 
                                  update=":formCadastro:painel" 
                                  actionListener="#{vendaController.novo}"  
                                  oncomplete="dialogCadastrarVenda.show()"
@@ -61,9 +61,20 @@
 
 
                         Cliente
-                        <p:inputText id="cliente" disabled="#{vendaController.carrinho.size() != 0}"
-                                     value="#{vendaController.venda.cliente}"
-                                     size="40"/>
+                        <p:selectOneMenu id="cliente" value="#{vendaController.cliente}" 
+                                          var="u" filter="true" 
+                                         filterMatchMode="startsWith" >
+
+                            <f:selectItem itemLabel="Selecione" itemValue="" />
+                            <f:selectItems value="#{vendaController.CLIENTES}" var="cliente"
+                                           itemLabel="#{clienteController.cliente.nomeCompleto}"
+                                           itemValue="#{clienteController.cliente}" />
+
+
+                            <p:column>
+                                <h:outputText value="#{u.nomeCompleto}" />
+                            </p:column>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="Produto" for="produto" />
                         <p:selectOneMenu id="produto" value="#{vendaController.produto}" 

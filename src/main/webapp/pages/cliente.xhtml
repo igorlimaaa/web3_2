@@ -10,7 +10,7 @@
     <ui:define name="corpo">
         <body>
             <h:form id="formNovo1">
-                <p:commandButton value="Novo Cliente" id="novo" 
+                <p:commandButton value="#{msg['btn.novoCliente']}" id="novo" 
                                  update=":formCadastro:painel" 
                                  actionListener="#{clienteController.novo}"
                                  oncomplete="dialogCadastrarCliente.show()"
@@ -22,24 +22,26 @@
                              var="cliente"   emptyMessage="Nenhum registro" 
                              paginator="true" rows="5" paginatorPosition="bottom" 
                              style="width: 100%; margin-left: 5%"> 
-                    <f:facet name="header"> Clientes Cadastrados</f:facet> 
+                    <f:facet name="header">#{msg['hash.cliente']}</f:facet> 
                     <p:column width="100"> 
-                        <f:facet name="header">Codigo</f:facet> 
+                        <f:facet name="header">#{msg['table.codigoCli']}</f:facet> 
                         <h:outputText value="#{cliente.codigo}" /> 
                     </p:column> 
                     <p:column width="400"> 
-                        <f:facet name="header">Nome Completo</f:facet> 
+                        <f:facet name="header">#{msg['table.nomeCompleto']}</f:facet> 
                         <h:outputText value="#{cliente.nomeCompleto}" /> 
                     </p:column> 
                     <p:column width="180"> 
-                        <f:facet name="header">CPF</f:facet> 
+                        <f:facet name="header">#{msg['table.cpf']}</f:facet> 
                         <h:outputText value="#{cliente.cpf}" /> 
                     </p:column> 
                     <p:column width="180"> 
-                        <f:facet name="header">Data de Nascimento</f:facet> 
-                        <h:outputText value="#{cliente.dataNascimento}" /> 
+                        <f:facet name="header">#{msg['table.dt_nascimento']}</f:facet> 
+                        <h:outputText value="#{cliente.dataNascimento}" />
+                        
                     </p:column> 
                     <p:column width="200"> 
+                        <f:facet name="header">#{msg['table.acao']}</f:facet>
                         <p:commandButton actionListener="#{clienteController.excluirCliente}"
                                          update="tabela" icon="ui-icon-trash">  
                             <p:confirm header="Confirmation" message="Deseja excluir o registro?" 

@@ -73,5 +73,16 @@ public class ClienteDAO {
 
     }
     
+    public List<Cliente> getList() {
+        try {
+            Session session = factory.openSession();
+            Criteria criteria = session.createCriteria(Cliente.class);
+            return criteria.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     
 }

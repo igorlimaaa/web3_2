@@ -30,11 +30,6 @@ public class ClienteController {
         cliente = new Cliente();
         clienteListener = new ArrayList<Cliente>();
     }
-    
-    public List<Cliente> getClientes() {
-        clienteList = clienteDAO.pesquisarTodos();
-        return clienteList;
-    }
 
     public Cliente getCliente() {
         return cliente;
@@ -59,5 +54,48 @@ public class ClienteController {
     public void excluirCliente(ActionEvent actionEvent) {
         clienteDAO.excluirCliente(cliente);
     }
+
+    public ClienteDAO getClienteDAO() {
+        return clienteDAO;
+    }
+
+    public void setClienteDAO(ClienteDAO clienteDAO) {
+        this.clienteDAO = clienteDAO;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
+
+    public VendaDAO getVendaDAO() {
+        return vendaDAO;
+    }
+
+    public void setVendaDAO(VendaDAO vendaDAO) {
+        this.vendaDAO = vendaDAO;
+    }
+
+    public List<Cliente> getClienteList() {
+        clienteList = clienteDAO.getList();
+        return clienteList;
+    }
+
+    public void setClienteList(List<Cliente> clienteList) {
+        this.clienteList = clienteList;
+    }
+
+    public static List<Cliente> getClienteListener() {
+        return clienteListener;
+    }
+
+    public static void setClienteListener(List<Cliente> clienteListener) {
+        ClienteController.clienteListener = clienteListener;
+    }
+    
+    
 
 }

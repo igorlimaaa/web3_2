@@ -23,7 +23,7 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigo;
     
-    @Column(length = 15)
+    @Column(length = 100)
     @NotNull(message = "CPF não informado!")
     private int cpf;
     

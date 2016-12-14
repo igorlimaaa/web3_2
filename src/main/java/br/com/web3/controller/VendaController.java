@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.web3.controller;
 
+import br.com.web3.dao.ClienteDAO;
 import br.com.web3.dao.ItensVendaDAO;
 import br.com.web3.dao.ProdutoDAO;
 import br.com.web3.dao.VendaDAO;
+import br.com.web3.model.Cliente;
 import br.com.web3.model.ItensVenda;
 import br.com.web3.model.Produto;
 import br.com.web3.model.Venda;
@@ -23,10 +20,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.primefaces.context.RequestContext;
 
-/**
- *
- * @author aula
- */
 @ManagedBean
 @SessionScoped
 public class VendaController implements Serializable {
@@ -35,14 +28,17 @@ public class VendaController implements Serializable {
     private ItensVenda itensVenda;
     private Produto produto;
     private Relatorio relatorio;
+    private Cliente cliente;
 
     private VendaDAO vendaDAO;
     private ProdutoDAO produtoDAO;
     private ItensVendaDAO itensVendaDAO;
+    private ClienteDAO clienteDAO;
 
     private List<Venda> vendaList;
     private List<ItensVenda> carrinho;
     public static List<Produto> PRODUTOS;
+    public static List<Cliente> CLIENTES;
 
     private Boolean desabilitar = true;
     private String tipoRel;
@@ -52,6 +48,7 @@ public class VendaController implements Serializable {
         produtoDAO = new ProdutoDAO();
         itensVendaDAO = new ItensVendaDAO();
         PRODUTOS = new ArrayList<Produto>();
+        CLIENTES = new ArrayList<Cliente>();
         relatorio = new Relatorio();
         tipoRel = "PDF";
     }
@@ -61,27 +58,47 @@ public class VendaController implements Serializable {
         for (Produto p : produtoDAO.pesquisarTodos()) {
             PRODUTOS.add(p);
         }
+//        for (Cliente q : clienteDAO.getList()){
+//            CLIENTES.add(q);
+//        }
+    }
+    
+    private void listaC(){
+        CLIENTES.clear();
+        for (Cliente q : clienteDAO.getList()){
+            CLIENTES.add(q);
+        }
     }
 
     public void novo(ActionEvent actionEvent) {
+        
         lista();
+        //listaC();
         carrinho = new ArrayList<ItensVenda>();
         RequestContext context = RequestContext.getCurrentInstance();
         context.update("formCadastro:tabProduto");
         context.update("formCadastro:produto");
+        context.update("formCadastro:cliente");        
         venda = new Venda();
+        //cliente = new Cliente();
+        //produto = new Produto();
         itensVenda = new ItensVenda();
     }
 
     public void gravar() {
         boolean gravar = true;
         String descProduto = "";
+        String nameCliente = "";
         for (ItensVenda iv : carrinho) {
             descProduto = iv.getProduto().getDescricao();
             if (iv.getQuantidade() > iv.getProduto().getQuantidade()) {
                 gravar = false;
                 break;
             }
+            
+//            for (ItensVenda ive :carrinho){
+//                nameCliente = ive.getCliente().getNomeCompleto();
+//            }
         }
         if (gravar) {
             vendaDAO.save(venda, carrinho);
@@ -96,6 +113,13 @@ public class VendaController implements Serializable {
 
     public List<ItensVenda> adicionarProdutos() {
         boolean valid = true;
+        
+        if (cliente == null) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Cliente não informado", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            valid = false;
+        }
 
         if (produto == null) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -114,10 +138,12 @@ public class VendaController implements Serializable {
         if (valid) {
 
             ItensVenda iv = new ItensVenda();
+            iv.setCliente(cliente);
             iv.setProduto(produto);
             iv.setQuantidade(itensVenda.getQuantidade());
             carrinho.add(iv);
             itensVenda = new ItensVenda();
+            cliente = new Cliente();
             produto = new Produto();
             desabilitar = false;
 
@@ -199,5 +225,19 @@ public class VendaController implements Serializable {
     public void setTipoRel(String tipoRel) {
         this.tipoRel = tipoRel;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<Cliente> getCLIENTES() {
+        return CLIENTES;
+    }
+    
+    
 
 }
