@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<ui:composition 
+    template="layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="titulo">Menu Principal</ui:define>
+    <ui:define name="corpo">
+        <body>
+            <h:form id="formNovo1">
+                <p:commandButton value="Novo Cliente" id="novo" 
+                                 update=":formCadastro:painel" 
+                                 actionListener="#{clienteController.novo}"
+                                 oncomplete="dialogCadastrarCliente.show()"
+                                 style="margin-left: 5%"/>
+            </h:form>
+            <br/>
+            <h:form id="formTabela">
+                <p:dataTable id="tabela" value="#{clienteController.clienteList}" 
+                             var="cliente"   emptyMessage="Nenhum registro" 
+                             paginator="true" rows="5" paginatorPosition="bottom" 
+                             style="width: 100%; margin-left: 5%"> 
+                    <f:facet name="header"> Clientes Cadastrados</f:facet> 
+                    <p:column width="100"> 
+                        <f:facet name="header">Codigo</f:facet> 
+                        <h:outputText value="#{cliente.codigo}" /> 
+                    </p:column> 
+                    <p:column width="400"> 
+                        <f:facet name="header">Nome Completo</f:facet> 
+                        <h:outputText value="#{cliente.nomeCompleto}" /> 
+                    </p:column> 
+                    <p:column width="180"> 
+                        <f:facet name="header">CPF</f:facet> 
+                        <h:outputText value="#{cliente.cpf}" /> 
+                    </p:column> 
+                    <p:column width="180"> 
+                        <f:facet name="header">Data de Nascimento</f:facet> 
+                        <h:outputText value="#{cliente.dataNascimento}" /> 
+                    </p:column> 
+                    <p:column width="200"> 
+                        <p:commandButton actionListener="#{clienteController.excluirCliente}"
+                                         update="tabela" icon="ui-icon-trash">  
+                            <p:confirm header="Confirmation" message="Deseja excluir o registro?" 
+                                       icon="ui-icon-alert" />
+                            <f:setPropertyActionListener target="#{clienteController.cliente}" 
+                                                         value="#{cliente}"/>  
+                        </p:commandButton> 
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" 
+                                             icon="ui-icon-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" 
+                                             icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </p:column> 
+                </p:dataTable> 
+            </h:form>
+
+            <p:dialog header="Cadastrar Cliente" 
+                      widgetVar="dialogCadastrarCliente"  
+                      resizable="false" modal="true" >
+                <h:form  id="formCadastro">
+
+
+                    <p:messages showDetail="false" showSummary="true" autoUpdate="true" /> 
+                    <h:panelGrid id ="painel" columns="2">
+                        Nome Completo
+                        <p:inputText id="nome" 
+                                     value="#{clienteController.cliente.nomeCompleto}" 
+                                     size="50"/>
+                        CPF
+                        <p:inputText value="#{clienteController.cliente.cpf}" />
+                        
+                        Data de Nascimento
+                        <p:calendar id="popup" value="#{clienteController.cliente.dataNascimento}" 
+                                    pattern="dd/MM/yyyy"/>
+
+                        <br/>
+                        <p:commandButton id="gravar" update=":formTabela:tabela" 
+                                         actionListener="#{clienteController.gravar}" 
+                                         value="Gravar" rendered="#{(clienteController.cliente.codigo == 0)}"/>
+                    </h:panelGrid>
+                </h:form>
+            </p:dialog>
+        </body>
+    </ui:define>
+</ui:composition>

@@ -199,17 +199,6 @@ public class ProdutoController {
         }
     }
 
-    public void gerarGraficoProduto() {
-        try {
-            List<Produto> listagemResultado = produtoDAO.pesquisarTodos();
-            HashMap paramRel = new HashMap();
-            String nomeRelatorio = "relGrafico";
-            relatorio.gerarRelatorio(nomeRelatorio, paramRel, listagemResultado);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public TipoProduto getTipoProduto() {
         return tipoProduto;
     }

@@ -5,7 +5,6 @@
  */
 package br.com.web3.model;
 
-import com.sun.istack.internal.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
