@@ -50,6 +50,7 @@ public class VendaController implements Serializable {
         PRODUTOS = new ArrayList<Produto>();
         CLIENTES = new ArrayList<Cliente>();
         relatorio = new Relatorio();
+        clienteDAO = new ClienteDAO();
         tipoRel = "PDF";
     }
 
