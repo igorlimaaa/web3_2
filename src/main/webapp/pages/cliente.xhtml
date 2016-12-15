@@ -33,7 +33,7 @@
                     </p:column> 
                     <p:column width="180"> 
                         <f:facet name="header">#{msg['table.cpf']}</f:facet> 
-                        <h:outputText value="#{cliente.cpf}" /> 
+                        <p:inputMask value="#{cliente.cpf}" mask="999.999.999-99"/> 
                     </p:column> 
                     <p:column width="180"> 
                         <f:facet name="header">#{msg['table.dt_nascimento']}</f:facet> 

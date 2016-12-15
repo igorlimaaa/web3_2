@@ -23,9 +23,10 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigo;
     
-    @Column(length = 100)
+    @Column(length = 11)
     @NotNull(message = "CPF não informado!")
-    private int cpf;
+    @NotEmpty(message = "Por favor informar o CPF!")
+    private String cpf;
     
     @Column
     @NotEmpty(message = "Por favor insira um nome!")
@@ -44,11 +45,11 @@ public class Cliente implements Serializable {
         this.codigo = codigo;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
